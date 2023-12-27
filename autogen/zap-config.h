@@ -24,7 +24,7 @@
 #if BIGENDIAN_CPU
 #define GENERATED_DEFAULTS { \
   0x04, 'R', 'I', 'N', 'O', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* 0,DEFAULT value for cluster: Basic, attribute: manufacturer name, side: server */ \
-  0x09, 'R', 'N', 'Z', 'L', '0', '3', 'C', '0', '2', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* 33,DEFAULT value for cluster: Basic, attribute: model identifier, side: server */ \
+  0x09, 'R', 'N', 'Z', 'E', '0', '2', 'C', '0', '2', 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, /* 33,DEFAULT value for cluster: Basic, attribute: model identifier, side: server */ \
    0x09, 0xAC, 0x2F, /* 66,DEFAULT value for cluster: Green Power, attribute: gpp functionality, side: client */ \
    0xFF, 0xFF, 0xFF, /* 69,DEFAULT value for cluster: Green Power, attribute: gpp active functionality, side: client */ \
    0x5A, 0x69, 0x67, 0x42, 0x65, 0x65, 0x41, 0x6C, 0x6C, 0x69, 0x61, 0x6E, 0x63, 0x65, 0x30, 0x39, /* 72,DEFAULT value for cluster: Green Power, attribute: gp link key, side: client */ \
