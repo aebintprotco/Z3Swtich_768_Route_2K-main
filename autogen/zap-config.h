@@ -14,13 +14,12 @@
 
 #define GENERATED_DEFAULTS_COUNT (9)
 
-/*添加私有属性步骤，GENERATED_ATTRIBUTE_COUNT +1
-  在GENERATED_ATTRIBUTES下按照格式添加
-  如果是basic 需要在ATTRIBUTE_SINGLETONS_SIZE 加上添加对应的字节数
-  如果是其他的clust  在GENERATED_CLUSTERS 列表中将对应的字节数加上去。
-  generatedAttributes 在添加新的属性之后，这个列表需要按新增的属性数加上去
-  需要注意， 内容值直接只能写不超过16byte 的值，如果是32byte 需要定义一个指向uint8_t 的数组 可以自定义数组取值赋予，也可以按照如上方式在GENERATED_DEFAULTS 中将数据叠加上去
-
+/*Add private attribute step, GENERATED_ATTRIBUTE_COUNT +1
+  Add in format under GENERATED_ATTRIBUTES
+  If it is basic, you need to add the corresponding number of bytes to ATTRIBUTE_SINGLETONS_SIZE.
+  If it is another cluster, add the corresponding number of bytes in the GENERATED_CLUSTERS list.
+  generatedAttributes After adding new attributes, this list needs to be added according to the number of new attributes.
+  It should be noted that the content value can only directly write a value not exceeding 16byte. If it is 32byte, you need to define an array pointing to uint8_t. You can customize the array value assignment, or you can superimpose the data in GENERATED_DEFAULTS as above.
 */
 #if BIGENDIAN_CPU
 #define GENERATED_DEFAULTS { \
@@ -55,8 +54,8 @@
 	#define GENERATED_MIN_MAX_DEFAULTS { }
 
 
-#define XYZ_VERSION(major, minor, patch) ((major) << 6 | (minor) << 4 | (patch)) // 高位到低位-> xx yy zzzz ->01,010101 -> 1.1.5大版本 3.3.15)
-                    //这里的版本号每次都要和OTA的同步
+#define XYZ_VERSION(major, minor, patch) ((major) << 6 | (minor) << 4 | (patch)) // High to low -> xx yy zzzz ->01,010101 -> 1.1.5 major version 3.3.15)
+                    //The version number here must be synchronized with OTA's every time
 #define VERSION   XYZ_VERSION(1,0,5)
 #define GENERATED_ATTRIBUTE_COUNT (102)
 

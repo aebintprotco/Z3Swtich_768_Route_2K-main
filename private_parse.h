@@ -1,7 +1,7 @@
 /*
  * led_user.h
  *
- *  Created on: 2023年8月29日
+ *  Created on: August 29, 2023
  *      Author: YWJ
  */
 
@@ -15,28 +15,28 @@
 
 
 
-// 将 16 位整数转换为字节数组（小端序）
+// Convert 16-bit integer to byte array (little endian)
 #define INT16_TO_LE_BYTES(val, bytes)  { (bytes)[0] = (uint8_t)((val) & 0xFF); (bytes)[1] = (uint8_t)(((val) >> 8) & 0xFF); }
 
 
-// 将 val 转换成32位整数  转换为字节数组（小端序）
+// Convert val to 32-bit integer to byte array (little endian)
 #define INT16_TO_LE_BYTES(val, bytes)  { (bytes)[0] = (uint8_t)((val) & 0xFF); (bytes)[1] = (uint8_t)(((val) >> 8) & 0xFF); }
 
-// 将 小端序 字节数组转换为 16 位整数
+// Convert little-endian byte array to 16-bit integer
 #define LE_BYTES_TO_INT16(bytes)       ((uint16_t)((bytes)[0] | ((bytes)[1] << 8)))
 
-// 将 32 位整数转换为字节数组（小端序）
+// Convert 32-bit integer to byte array (little endian)
 #define INT32_TO_LE_BYTES(val, bytes)  { (bytes)[0] = (uint8_t)((val) & 0xFF); \
                                          (bytes)[1] = (uint8_t)(((val) >> 8) & 0xFF); \
                                          (bytes)[2] = (uint8_t)(((val) >> 16) & 0xFF); \
                                          (bytes)[3] = (uint8_t)(((val) >> 24) & 0xFF); }
-// 将 小端序 字节数组转换为 32 位整数
+// Convert little-endian byte array to 32-bit integer
 #define LE_BYTES_TO_INT32(bytes)       ((uint32_t)((bytes)[0] | ((bytes)[1] << 8) | ((bytes)[2] << 16)) | ((bytes)[3] << 24))
 
 
 
 
-// 定义命令字索引
+// Define command word index
 #define CMD_HEARTBEAT               0x99
 #define CMD_DEVICE_PING             0x01
 #define CMD_DEVICE_STATUS_QUERY     0x02
@@ -80,10 +80,10 @@
 
 typedef enum {
   PROP_UNKNOWN,
-    PROP_BOOL,    //1个字节
-    PROP_INT,     //4个字节
-    PROP_FLOAT,   //4个字节
-    PROP_ENUM,    //4个字节    //小端传输
+    PROP_BOOL,    //4 bytes
+    PROP_INT,     //4 bytes
+    PROP_FLOAT,   //4 bytes
+    PROP_ENUM,    //4 bytes  //little endian transfer
     PROP_FAULT,
     PROP_TEXT,
     PROP_RAW,

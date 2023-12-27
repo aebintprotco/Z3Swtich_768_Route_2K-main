@@ -107,7 +107,7 @@ G_USER_CTRL_T tUserCtrl ={0,};
 G_USER_CTRL_T *tpUserControl =&tUserCtrl;
 
 
-#define   User_Dat_ID   1   //存储对象标识
+#define   User_Dat_ID   1   //Storage object ID
 
 #define   Mark_Head     0x55
 #define   Mark_End      0xa4
@@ -130,7 +130,7 @@ void nvm3_user_init(void)
   G_USER_CTRL_T *tpUserInit =&tUserInit;
   Ecode_t status;
 
-  //status = nvm3_open(&handle, &nvm3Data1);  //打开 nvm3存储器
+  //status = nvm3_open(&handle, &nvm3Data1);  //Open nvm3 storage
   status = nvm3_initDefault();
   sl_zigbee_app_debug_println("oPen status: 0x%x \n",status);
   if (status != ECODE_NVM3_OK) {
@@ -141,18 +141,18 @@ void nvm3_user_init(void)
 
 #if 0
     size_t dataLen1;
-    //读取对应句柄中的存储数量，如果没有对象写入初始值，
+    //Read the stored quantity in the corresponding handle. If no object writes the initial value,
     // Get the number of valid keys already in NVM3
     dataLen1 = nvm3_countObjects(nvm3_defaultHandle);
 
     sl_zigbee_app_debug_println("object dataLen1 %d\n",dataLen1);
-      //想要添加新的对象标识符时可以先查一下总共定义了多少个标识nvm3_countObjects(nvm3_defaultHandle);
-         //然后使用下面的nvm3_enumObjects   跑遍所有的标识，将标识名打印出来，这样可以确保新添加的标识符不会与旧的重复
+      //When you want to add a new object identifier, you can first check how many identifiers nvm3_countObjects are defined in total.(nvm3_defaultHandle);
+         //Then use the following nvm3_enumObjects to run through all the identifiers and print out the identifier names. This ensures that the newly added identifiers will not duplicate the old ones.
     nvm3_ObjectKey_t keyList[dataLen1];
     size_t numKeys = nvm3_enumObjects(nvm3_defaultHandle, keyList, dataLen1, NVM3_KEY_MIN, NVM3_KEY_MAX);
     for (size_t i = 0; i < numKeys; i++) {
         nvm3_ObjectKey_t key = keyList[i];
-        // 打印对象标识
+        // Print object ID
          sl_zigbee_app_debug_println("Object Key: %u\n", key);
     }
 #endif
@@ -184,8 +184,8 @@ void nvm3_user_init(void)
       tpUserInit->Count_Down_3   = 0;
       tpUserInit->backlight_16   = 1;
       tpUserInit->Power_On_Times = 0;
-      memcpy(tpUserControl, tpUserInit, sizeof(G_USER_CTRL_T)); //写入应用
-      status = nvm3_writeData(nvm3_defaultHandle, User_Dat_ID, &tUserInit, sizeof(G_USER_CTRL_T)); //写入flash
+      memcpy(tpUserControl, tpUserInit, sizeof(G_USER_CTRL_T)); //Write application
+      status = nvm3_writeData(nvm3_defaultHandle, User_Dat_ID, &tUserInit, sizeof(G_USER_CTRL_T)); //write to flash
       sl_zigbee_app_debug_println("INIT write status: 0x%x \n",status);
 
    }else{
@@ -215,33 +215,33 @@ void nvm3_user_init(void)
      }
      sl_zigbee_app_debug_println("tpUserInit->Power_On_Times: %d\n",tpUserInit->Power_On_Times);
      if(++tpUserInit->Power_On_Times >=6){
-         tpUserInit->Power_On_Times =0;    //短时间连续上电3次，执行重置配网
+         tpUserInit->Power_On_Times =0;    //Power on three times in a short period of time to reset the network configuration.
       //   join_net_work(1);
 
       //   sl_zigbee_app_debug_println("join_net-work \n");
      }
-     memcpy(tpUserControl, tpUserInit, sizeof(G_USER_CTRL_T)); //写入应用
-     nvm3_writeData(nvm3_defaultHandle, User_Dat_ID, tpUserInit, sizeof(G_USER_CTRL_T)); //写入flash
+     memcpy(tpUserControl, tpUserInit, sizeof(G_USER_CTRL_T)); //Write application
+     nvm3_writeData(nvm3_defaultHandle, User_Dat_ID, tpUserInit, sizeof(G_USER_CTRL_T)); //write to flash
 
      sl_zigbee_app_debug_println("tpUserControl->light: %d   color =%d\n",tpUserControl->Brightness,tpUserControl->Color_Temp);
    }
-   if(tpUserControl->power_memory_1   == '0'){        //灭
+   if(tpUserControl->power_memory_1   == '0'){        //destroy
        tpUserControl->Onoff_1        = 0;
-   }else  if(tpUserControl->power_memory_1   == '1'){ //亮
+   }else  if(tpUserControl->power_memory_1   == '1'){ //Bright
        tpUserControl->Onoff_1        = 1;
-   }else  if(tpUserControl->power_memory_1   == '2'){ //恢复记忆
+   }else  if(tpUserControl->power_memory_1   == '2'){ //Restore memory
    }
-   if(tpUserControl->power_memory_2   == '0'){        //灭
+   if(tpUserControl->power_memory_2   == '0'){        //destroy
        tpUserControl->Onoff_2        = 0;
-   }else  if(tpUserControl->power_memory_2   == '1'){ //亮
+   }else  if(tpUserControl->power_memory_2   == '1'){ //Bright
        tpUserControl->Onoff_2        = 1;
-   }else  if(tpUserControl->power_memory_2   == '2'){ //恢复记忆
+   }else  if(tpUserControl->power_memory_2   == '2'){ //Restore memory
    }
-   if(tpUserControl->power_memory_3   == '0'){        //灭
+   if(tpUserControl->power_memory_3   == '0'){        //destroy
        tpUserControl->Onoff_3        = 0;
-   }else  if(tpUserControl->power_memory_3   == '1'){ //亮
+   }else  if(tpUserControl->power_memory_3   == '1'){ //Bright
        tpUserControl->Onoff_3        = 1;
-   }else  if(tpUserControl->power_memory_3   == '2'){ //恢复记忆
+   }else  if(tpUserControl->power_memory_3   == '2'){ //Restore memory
    }
 
 
@@ -252,8 +252,8 @@ void nvm3_user_init(void)
 
 
 
-   nvm_init_ok =1;    //初始化完成
-   // 关闭 NVM3 控制器
+   nvm_init_ok =1;    //loading finished
+   // Shut down the NVM3 controller
  //  nvm3_deinitDefault();
  //  nvm3_close(nvm3_defaultHandle);
 }
@@ -292,15 +292,15 @@ void clean_flash(void)
   tpUserInit->Count_Down_2   = 0;
   tpUserInit->Count_Down_3   = 0;
 	tpUserInit->Power_On_Times = 0;
-  memcpy(tpUserControl, tpUserInit, sizeof(G_USER_CTRL_T)); //写入应用
-  nvm3_writeData(nvm3_defaultHandle, User_Dat_ID, &tUserInit, sizeof(G_USER_CTRL_T)); //写入flash
+  memcpy(tpUserControl, tpUserInit, sizeof(G_USER_CTRL_T)); //Write application
+  nvm3_writeData(nvm3_defaultHandle, User_Dat_ID, &tUserInit, sizeof(G_USER_CTRL_T)); //write to flash
   sl_zigbee_app_debug_println("clean_flash :  \n");
 }
 
 void write_flash(void)
 {
   if(++delay_write >=20){
-      delay_write =0;     //250MS写入flash    主循环时间不稳定
+      delay_write =0;     //250MS is written to flash and the main loop time is unstable.
 
    //   led_toggle(&sl_led_led1);
    //   sl_zigbee_app_debug_println("start write flash\n");
@@ -312,7 +312,7 @@ void write_flash(void)
     //  sl_zigbee_app_debug_println("read00 ->light: %d   color =%d\n",tpUserInit->Brightness,tpUserInit->Color_Temp);
 
       if((tpUserInit->MarkHead == Mark_Head) && (tpUserInit->MarkEnd == Mark_End)){
-          EmberStatus status = nvm3_writeData(nvm3_defaultHandle, User_Dat_ID, tpUserControl, sizeof(G_USER_CTRL_T)); //写入flash
+          EmberStatus status = nvm3_writeData(nvm3_defaultHandle, User_Dat_ID, tpUserControl, sizeof(G_USER_CTRL_T)); //write to flash
           sl_zigbee_app_debug_println("write status: 0x%x \n",status);
           nvm3_readData(nvm3_defaultHandle, User_Dat_ID, tpUserInit, sizeof(G_USER_CTRL_T));
           sl_zigbee_app_debug_println("read ->Power_On_Times: %d   Onoff =%d  Onoff2 =%d  Onoff3 =%d\n",tpUserInit->Power_On_Times,tpUserInit->Onoff_1,tpUserInit->Onoff_2,tpUserInit->Onoff_3);
@@ -323,7 +323,7 @@ void write_flash(void)
 }
 
 static app_timer_t app_opened_timer;
-EmberStatus r_cancel_network =0;  //定时器调用重复配网标志
+EmberStatus r_cancel_network =0;  //Timer calls repeated network configuration flag
 EmberStatus get_network_state(void)
 {
   return r_cancel_network;
@@ -337,39 +337,39 @@ void join_net_work(uint8_t join_v)
 
   switch (status) {
       case EMBER_NO_NETWORK:
-          // 如果当前没有加入任何 Zigbee 网络，则启动网络加入流程。
+          // If you are not currently joining any Zigbee network, start the network joining process.
           status = emberAfPluginNetworkSteeringStart();
           sl_zigbee_app_debug_println("EMBER_NO_NETWORK state: 0x%02X",status);
           if(join_v){
-              r_cancel_network =1;   //定时调用加网
+              r_cancel_network =1;   //Call screening regularly
               emberAfZllResetToFactoryNew();
           }
           break;
       case EMBER_JOINING_NETWORK:
-          // 如果当前正在尝试加入 Zigbee 网络，则不进行任何操作。
+          // If you are currently trying to join a Zigbee network, no action is taken.
           break;
       case EMBER_JOINED_NETWORK:
-          // 如果当前已经加入了 Zigbee 网络，则不进行任何操作。
+          // If you have already joined the Zigbee network, no operation will be performed.
           if(join_v){
               emberAfZllResetToFactoryNew();
-          //    clean_flash();    //清除flash内容
-          //  status = emberLeaveNetwork();  //先离开网络
+          //    clean_flash();    //Clear flash content
+          //  status = emberLeaveNetwork();  //Leave the network first
          //   status = emberAfPluginNetworkSteeringStart();
             sl_zigbee_app_debug_println("EMBER_JOINED_NETWORK state: 0x%02X",status);
             r_cancel_network =1;
           }else{
               r_cancel_network =0;
-              led_turn_off(COMMISSIONING_STATUS_LED_0);   //连上网络 熄灭
+              led_turn_off(COMMISSIONING_STATUS_LED_0);   //Connect to the Internet Off
           }
           break;
       case EMBER_JOINED_NETWORK_NO_PARENT:
-          // 如果当前已经加入了 Zigbee 网络，但是没有找到合适的父节点，则重新启动网络加入流程。
+          // If you have already joined the Zigbee network but no suitable parent node is found, restart the network joining process.
           emberAfPluginNetworkSteeringStop();
         //  emberAfPluginNetworkSteeringStart();
           r_cancel_network =1;
           break;
       default:
-          // 对于其他的状态值，可以进行相应的错误处理。
+          // For other status values, corresponding error handling can be performed.
           break;
   }
 
@@ -386,7 +386,7 @@ void  key_enter_net(void)
 #if(SWITCH_NUM >=1)
   static uint8_t  key1_count =0;
   if(key1_flag){
-      if(++key1_count >=NET_Count){  //长按3S配网
+      if(++key1_count >=NET_Count){  //Long press 3S to configure network
           key1_count =0;
           join_net_work(1);
           key1_flag =0;
@@ -401,7 +401,7 @@ void  key_enter_net(void)
   static uint8_t  key2_count =0;
 
   if(key2_flag){
-      if(++key2_count >=NET_Count){  //长按3S配网
+      if(++key2_count >=NET_Count){  //Long press 3S to configure network
           key2_count =0;
           join_net_work(1);
           key2_flag =0;
@@ -416,7 +416,7 @@ void  key_enter_net(void)
   static uint8_t  key3_count =0;
 
   if(key3_flag){
-      if(++key3_count >=NET_Count){  //长按3S配网
+      if(++key3_count >=NET_Count){  //Long press 3S to configure network
           key3_count =0;
           join_net_work(1);
           key3_flag =0;
@@ -430,7 +430,7 @@ void  key_enter_net(void)
   static uint8_t  key4_count =0;
 
   if(key4_flag){
-      if(++key4_count >=NET_Count){  //长按3S配网
+      if(++key4_count >=NET_Count){  //Long press 3S to configure network
           key4_count =0;
           join_net_work(1);
           key4_flag =0;
@@ -454,24 +454,24 @@ void rep_join(void)
 
         if(r_cancel_network){
            if(times_count <178){
-               join_net_work(0);       //3分钟内才会允许调用beacon加入网络
+               join_net_work(0);       //Calling beacon to join the network will be allowed within 3 minutes.
            }
-           if(++times_count >=186){    // 186S 配网提示时长
+           if(++times_count >=186){    // 186S Distribution network prompt duration
                times_count = 0;
                r_cancel_network =0;
-               led_turn_on(COMMISSIONING_STATUS_LED_0);   //超时未连上网络 点亮
+               led_turn_on(COMMISSIONING_STATUS_LED_0);   //Timeout and not connected to the network. Lights up.
            }
        }else{
            times_count =0;
        }
        if(!init_power_flag){
-           if(++times_count2 >=3){  //通电3S后清除上电数据。
+           if(++times_count2 >=3){  //Clear the power-on data 3 seconds after power-on.
                times_count2 =0;
                init_power_flag =1;
                tpUserControl->Power_On_Times = 0;
-               set_write_flag(1);  //写入flash
+               set_write_flag(1);  //write to flash
 			   if(emberAfNetworkState() == EMBER_JOINED_NETWORK){
-                 led_turn_off(COMMISSIONING_STATUS_LED_0);   //连上网络 熄灭
+                 led_turn_off(COMMISSIONING_STATUS_LED_0);   //Connect to the Internet Off
               //   GPIO_PinModeSet(gpioPortD,4,gpioModeInputPull,1);
               //   GPIO_PinModeSet(gpioPortA,0,gpioModePushPull,0);
               //   sl_zigbee_app_debug_println("COMMISSIONING_STATUS_LED_0 set off\n");
@@ -490,14 +490,14 @@ uint8_t get_init_state(void)
 
 
 
-//倒计时功能  1S执行调用程序
+//Countdown function 1S execution calling program
 void f_countdown1_off(uint32_t* times)
 {
   static uint8_t count =0,rand_c =60;
    if(*times){
        (*times)--;
        if((*times) ==0){
-           tpUserControl->Onoff_1 ^=1;  //执行取反
+           tpUserControl->Onoff_1 ^=1;  //Perform negation
            report_endpoint_onoff(1,tpUserControl->Onoff_1);
            report_cmd_countdown(1);
            sl_zigbee_app_debug_println(" times %d onoff %d",*times,tpUserControl->Onoff_1);
@@ -520,7 +520,7 @@ void f_countdown2_off(uint32_t* times)
    if(*times){
        (*times)--;
        if((*times) ==0){
-           tpUserControl->Onoff_2 ^=1;  //执行取反
+           tpUserControl->Onoff_2 ^=1;  //Perform negation
            report_endpoint_onoff(2,tpUserControl->Onoff_2);
            report_cmd_countdown(2);
            sl_zigbee_app_debug_println(" times2 %d onoff %d",*times,tpUserControl->Onoff_2);
@@ -543,7 +543,7 @@ void f_countdown3_off(uint32_t* times)
    if(*times){
        (*times)--;
        if((*times) ==0){
-           tpUserControl->Onoff_3 ^=1;  //执行取反
+           tpUserControl->Onoff_3 ^=1;  //Perform negation
            report_endpoint_onoff(3,tpUserControl->Onoff_3);
            report_cmd_countdown(3);
            sl_zigbee_app_debug_println(" times3 %d onoff %d",*times,tpUserControl->Onoff_3);
@@ -564,7 +564,7 @@ void f_countdown3_off(uint32_t* times)
 
 
 
-static uint8_t r_Abnormal_recovery =0;  //异常计时恢复
+static uint8_t r_Abnormal_recovery =0;  //Abnormal timing recovery
 static uint8_t r_30second =0;
 static uint16_t delay_report =0;
 void app_opened_timer_cbbbx(app_timer_t *timer, void *data)
@@ -604,13 +604,13 @@ void app_opened_timer_cbbbx(app_timer_t *timer, void *data)
 }
 
 
-//定时上报开关状态用于心跳
+//Regularly reporting switch status for heartbeat
 void time_report_hearbeat(void)
 {
 //  static uint8_t rand_tims=30;
 
   uint32_t tickCount  = halCommonGetInt32uMillisecondTick();
-  if(HeartbeatTime){  //有查询协议信息来就不执行定时上报，没有就执行随机定时上报
+  if(HeartbeatTime){  //If there is query protocol information, scheduled reporting will not be performed. If there is no query protocol information, random scheduled reporting will be performed.
     if((tickCount - Save_HbTime) >=HeartbeatTime)
     {
         sl_zigbee_app_debug_println(" ===  tickCount %d  Save_HbTime =%d \n",tickCount,Save_HbTime);
@@ -643,17 +643,17 @@ void app_init(void)
     nvm3_user_init();
     set_rand_source();
 
-    emberSetRadioPower(EMBER_AF_PLUGIN_NETWORK_STEERING_RADIO_TX_POWER);  //设置最大功率输出
+    emberSetRadioPower(EMBER_AF_PLUGIN_NETWORK_STEERING_RADIO_TX_POWER);  //Set maximum power output
  //   emberSetLogicalAndRadioChannel(11);
 }
 
 
 
-//修复定时
+//Repair timing
 
 void  Repair_timer(void)
 {
-  if(++r_Abnormal_recovery >=25){  //0.25S 异常恢复定时器
+  if(++r_Abnormal_recovery >=25){  //0.25S exception recovery timer
       r_Abnormal_recovery =0;
       app_timer_start(&app_opened_timer,
           Time_Count,
@@ -665,12 +665,12 @@ void  Repair_timer(void)
 }
 
 
-//1秒执行调用
+//Execute call in 1 second
 void f_one_sec_run(void)
 {
   if(one_sec_flg){
       one_sec_flg =0;
-      rep_join();            //重复入网操作
+      rep_join();            //Repeat the network access operation
       f_countdown1_off(&tpUserControl->Count_Down_1);
       f_countdown2_off(&tpUserControl->Count_Down_2);
       f_countdown3_off(&tpUserControl->Count_Down_3);
@@ -683,16 +683,16 @@ uint8_t switch_state =0;
 void app_process_action(void)
 {
   static uint32_t save_tick =0;
-//  static uint8_t Brightness;  //亮度
-//  static uint16_t Color_Temp;  //色温
+//  static uint8_t Brightness;  //brightness
+//  static uint16_t Color_Temp;  //color temperature
 
   uint32_t tickCount  = halCommonGetInt32uMillisecondTick();
 
 
 
 
-  time_report_hearbeat();  //定时上报
-  if(tickCount - save_tick >=10){ //10ms执行函数
+  time_report_hearbeat();  //Report regularly
+  if(tickCount - save_tick >=10){ //10ms execution function
       save_tick = tickCount;
 
       write_flash();
@@ -708,7 +708,7 @@ void app_process_action(void)
             report_state =0;
             report_all_data();
         }
-      //  led_turn_off(COMMISSIONING_STATUS_LED_0); //配网指示灯灭
+      //  led_turn_off(COMMISSIONING_STATUS_LED_0); //Distribution network indicator light is off
       //  if(r_cancel_network == 0){
 #if(SWITCH_NUM >=1)
          if(tpUserControl->Onoff_1){
@@ -771,7 +771,7 @@ void report_agreement(void *value,uint16_t len)
 
 
 
-    if((type == EMBER_INCOMING_MULTICAST) || (recevi_type == EMBER_INCOMING_MULTICAST)){ //群组消息不回复  report
+    if((type == EMBER_INCOMING_MULTICAST) || (recevi_type == EMBER_INCOMING_MULTICAST)){ //No reply to group messages report
         return;
     }
 
@@ -781,29 +781,29 @@ void report_agreement(void *value,uint16_t len)
 
 
 
-    //报开关状态
+    //Report switch status
     idx =0;
     attribute_record3[idx++] = LOW_BYTE(0x0068);
-    attribute_record3[idx++] = HIGH_BYTE(0x0068);//私有协议定义属性
+    attribute_record3[idx++] = HIGH_BYTE(0x0068);//Private protocol definition attributes
     attribute_record3[idx++] = ZCL_OCTET_STRING_ATTRIBUTE_TYPE;
   //  attribute_record3[idx++] = len;
     sl_zigbee_app_debug_print(" len 0x%02X ",len);
     uint8_t *val_ptr = (uint8_t*)value;
 
      for (i = 0; i < len; i++) {
-        attribute_record3[idx++] = val_ptr[i]; // 解引用指针取得数据
+        attribute_record3[idx++] = val_ptr[i]; // Dereference pointer to obtain data
         sl_zigbee_app_debug_print(" 0x%02X ",val_ptr[i]);
      }
 
 
 
-     //将属性报告填充进入缓冲区   CLUSTER值   数据内容  数据长度      //Fill a ZCL global report attributes command buffer  ZCL_BASIC_CLUSTER_ID  ZCL_GENERIC_TUNNEL_CLUSTER_ID
+     //Fill the attribute report into the buffer CLUSTER value data content data length    //Fill a ZCL global report attributes command buffer  ZCL_BASIC_CLUSTER_ID  ZCL_GENERIC_TUNNEL_CLUSTER_ID
      status = emberAfFillCommandGlobalServerToClientReportAttributes_no_response(ZCL_BASIC_CLUSTER_ID,attribute_record3,idx);
     sl_zigbee_app_debug_println("ReportAttributes_no_response: 0x%02X\n",status);
     //写入 sourceEndpoint  和 destinationEndpoint    //Specify endpoints for command sending
     emberAfSetCommandEndpoints(0x01, 0x01);
 
-    //调用发送数据接口将缓存好的数据发出           发生选项  和  单播目标地址
+    //Call the send data interface to send the cached data with occurrence options and unicast target address.
     status = emberAfSendCommandUnicast(EMBER_OUTGOING_DIRECT, 0x0000);
    // sl_zigbee_app_debug_println("emberAfSendCommandUnicast: 0x%02X\n",status);
     //status2 = emberAfSendCommandUnicastToBindings();
@@ -835,11 +835,11 @@ void report_endpoint_onoff(uint8_t endpoint,uint8_t value)
    //   sl_zigbee_app_debug_println("groupId :%d  option %x  destinationEndpoint %d   type =%x\r\n",emberAfCurrentCommand()->apsFrame->groupId,
     //                              emberAfCurrentCommand()->apsFrame->options,emberAfCurrentCommand()->apsFrame->destinationEndpoint,emberAfCurrentCommand()->type);
 
-     if((type == EMBER_INCOMING_MULTICAST) || (recevi_type == EMBER_INCOMING_MULTICAST)){ //群组消息不回复  report
+     if((type == EMBER_INCOMING_MULTICAST) || (recevi_type == EMBER_INCOMING_MULTICAST)){ //No reply to group messages  report
          return;
      }
 
-    //报开关状态
+    //Report switch status
     idx =0;
     attribute_record3[idx++] = LOW_BYTE(ZCL_ON_OFF_ATTRIBUTE_ID);
     attribute_record3[idx++] = HIGH_BYTE(ZCL_ON_OFF_ATTRIBUTE_ID);
@@ -847,13 +847,13 @@ void report_endpoint_onoff(uint8_t endpoint,uint8_t value)
     attribute_record3[idx++] = value;
 
 
-    //将属性报告填充进入缓冲区   CLUSTER值   数据内容  数据长度      //Fill a ZCL global report attributes command buffer
+    //Fill the attribute report into the buffer CLUSTER value data content data length      //Fill a ZCL global report attributes command buffer
     status = emberAfFillCommandGlobalServerToClientReportAttributes_no_response(ZCL_ON_OFF_CLUSTER_ID,attribute_record3,idx);
     sl_zigbee_app_debug_println("emberAfFillCommandGlobalServerToClientReportAttributes: 0x%02X\n",status);
-    //写入 sourceEndpoint  和 destinationEndpoint    //Specify endpoints for command sending
+    //Write sourceEndpoint and destinationEndpoint   //Specify endpoints for command sending
     emberAfSetCommandEndpoints(endpoint, 0x01);
 
-    //调用发送数据接口将缓存好的数据发出           发生选项  和  单播目标地址
+    //Call the send data interface to send the cached data          发生选项  和  单播目标地址
     status = emberAfSendCommandUnicast(EMBER_OUTGOING_DIRECT, 0x0000);
     sl_zigbee_app_debug_println("emberAfSendCommandUnicast: 0x%02X\n",status);
     //status2 = emberAfSendCommandUnicastToBindings();
@@ -882,7 +882,7 @@ static void commissioning_led_event_handler(sl_zigbee_event_t *event)
   //  EmberStatus status = emberAfPluginNetworkSteeringStart();
    // r_cancel_network =1;
     sl_zigbee_app_debug_println("Up Not Join NetWork");
-    sl_zigbee_event_set_delay_ms(&com_delay_join,500);  //上电后检查到没有加入任何网络延迟500ms后进入配网状态，500MS串口留给产测信标检查时间。
+    sl_zigbee_event_set_delay_ms(&com_delay_join,500);  //After powering on, it is checked that no network has been added to the network. After a delay of 500ms, it enters the network configuration state. The 500MS serial port is left for production test beacon check time.
   }
 }
 
@@ -924,22 +924,22 @@ void emberAfStackStatusCallback(EmberStatus status)
       sl_zigbee_app_debug_println("emberAfStackStatusCallback status = EMBER_NETWORK_DOWN\n\n");
       join_net_work(1);
    // led_turn_off(COMMISSIONING_STATUS_LED);
-      led_turn_on(COMMISSIONING_STATUS_LED_0);    //断网 点亮
+      led_turn_on(COMMISSIONING_STATUS_LED_0);    //Disconnection light up
   } else if (status == EMBER_NETWORK_UP) {
    // led_turn_on(COMMISSIONING_STATUS_LED);
-  	  led_turn_off(COMMISSIONING_STATUS_LED_0);   //连上网络 熄灭
+  	  led_turn_off(COMMISSIONING_STATUS_LED_0);   //Connect to the Internet Off
       sl_zigbee_event_set_active(&finding_and_binding_event);
    //   report_all_data();
       set_rand_source();
       rand_c = (rand()%500);
    //   rand_c = (rand()%250);
-      delay_report = 4+rand_c; //延迟上报所有状态，保证读到flash中的内容
+      delay_report = 4+rand_c; //Delay reporting of all status to ensure reading the content in flash
       sl_zigbee_app_debug_println("emberAfStackStatusCallback status %d = EMBER_NETWORK_UP\n\n",delay_report);
 
   }
 }
 
-// 定义回调函数
+// Define callback function
 
 
 /** @brief Init
@@ -986,7 +986,7 @@ void emberAfPluginNetworkSteeringCompleteCallback(EmberStatus status,
     // target at any point.
 
     #if 0
-        //尝试自己组件网络 边缘设备不需要
+        //Try to build your own network. Edge devices are not needed.
         status = emberAfZllSetInitialSecurityState();
         if (status != EMBER_SUCCESS) {
           sl_zigbee_app_debug_println("Error: cannot initialize ZLL security: 0x%02X", status);
@@ -1045,7 +1045,7 @@ void report_fuction(uint8_t ATTRIBUTE_ID, uint8_t TYPE, uint16_t CLUSTER,void *v
         return;
     }
 
-    //报开关状态f
+    //Report switch status f
     idx =0;
     attribute_record3[idx++] = LOW_BYTE(ATTRIBUTE_ID);
     attribute_record3[idx++] = HIGH_BYTE(ATTRIBUTE_ID);
@@ -1057,21 +1057,21 @@ void report_fuction(uint8_t ATTRIBUTE_ID, uint8_t TYPE, uint16_t CLUSTER,void *v
 
 
      for (i = 0; i < len; i++) {
-        attribute_record3[idx++] = val_ptr[i]; // 解引用指针取得数据
+        attribute_record3[idx++] = val_ptr[i]; // Dereference pointer to obtain data
      //   sl_zigbee_app_debug_println("val_ptr[i]: 0x%02X\n",val_ptr[i]);
      }
 
 
 
 
-    //将属性报告填充进入缓冲区   CLUSTER值   数据内容  数据长度      //Fill a ZCL global report attributes command buffer
+    //Fill the attribute report into the buffer CLUSTER value data content data length      //Fill a ZCL global report attributes command buffer
 
     uint8_t status = emberAfFillCommandGlobalServerToClientReportAttributes_no_response(CLUSTER,attribute_record3,idx);
     sl_zigbee_app_debug_println("ReportAttributes_no_response: 0x%02X\n",status);
-    //写入 sourceEndpoint  和 destinationEndpoint    //Specify endpoints for command sending
+    //Write sourceEndpoint and destinationEndpoint   //Specify endpoints for command sending
     emberAfSetCommandEndpoints(0x01, 0x01);
 
-    //调用发送数据接口将缓存好的数据发出           发生选项  和  单播目标地址
+    //Call the send data interface to send the cached data with occurrence options and unicast target address.
     status = emberAfSendCommandUnicast(EMBER_OUTGOING_DIRECT, 0x0000);
   //  sl_zigbee_app_debug_println("emberAfSendCommandUnicast: 0x%02X  CLUSTER 0x%02X\n",status,CLUSTER);
     //status2 = emberAfSendCommandUnicastToBindings();
@@ -1094,7 +1094,7 @@ void emberAfPostAttributeChangeCallback(uint8_t endpoint,
                                         uint8_t* value)
 {
   g_endpoint = endpoint;
-  if(!nvm_init_ok) return;    //nvm初始化未完成不可操作
+  if(!nvm_init_ok) return;    //nvm initialization is not completed and is inoperable
  // sl_zigbee_app_debug_println("clusterId 0x%02x attributeId 0x%02x:  mask 0x%02X  value =%d\n",clusterId, attributeId, mask,*value);
   if (clusterId == ZCL_ON_OFF_CLUSTER_ID
       && attributeId == ZCL_ON_OFF_ATTRIBUTE_ID
@@ -1106,7 +1106,7 @@ void emberAfPostAttributeChangeCallback(uint8_t endpoint,
                                      sizeof(r_temp_onoff))
           == EMBER_ZCL_STATUS_SUCCESS)
       {
-          //回复状态值
+          //Reply status value
           sl_zigbee_app_debug_println("recv attribute onoff =%d , endpoint:%d\r\n",r_temp_onoff, endpoint);
           if(g_endpoint == 0x01){
               if(r_temp_onoff !=tpUserControl->Onoff_1){
@@ -1290,7 +1290,7 @@ void sli_zigbee_app_framework_force_sleep_callback(void)
 
 
 /*
- * 产测部分
+ * Production test part
  */
 
 
@@ -1309,23 +1309,23 @@ void emberEnter_Test(uint8_t clust,uint8_t comm)
 {
   if (emberAfNetworkState() == EMBER_JOINED_NETWORK) {
       printf("retrun emberAfNetworkState");
-      return; //已入网 退出   不会进入产测
+      return; //Already connected to the network. Exit. Will not enter production test.
   }
   if(get_network_state()){  //
     printf("retrun r_cancel_network");
-    return;   //处于配网状态，也不会进入产测。
+    return;   //It is in the distribution network state and will not enter production testing.
   }
 
-    if(get_init_state()){ //初始化超过时间不再进入产测
+    if(get_init_state()){ //If the initialization time exceeds, it will no longer enter production testing.
       printf("retrun Test_Enter");
-      return;   //处于配网状态，也不会进入产测。
+      return;   //It is in the distribution network state and will not enter production testing.
     }
-  //网络情况下和没有配网情况下， 收到产测信号开始进入产测
+  //Under network conditions and without distribution network, start production testing after receiving the production testing signal.
   if((clust == 0) &&(comm == 0x55)){
     /*  if(!tpUserControl->test_mode){
-          Production_Test =1;   //第一次产测
+          Production_Test =1;   //First production test
       }else{
-          Production_Test =2;   //重复产测
+          Production_Test =2;   //Repeat production testing
       }
      */
       sl_zigbee_app_debug_println("Enter TestMode =%d \n",Production_Test);
