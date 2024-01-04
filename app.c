@@ -62,8 +62,8 @@
 #define FINDING_AND_BINDING_DELAY_MS 3000
 #define BUTTON1                      0
 #define BUTTON2                      1
-#define BUTTON3                      2
-#define BUTTON4                      3
+// #define BUTTON3                      2
+// #define BUTTON4                      3
 #define SWITCH_ENDPOINT              1
 
 static sl_zigbee_event_t commissioning_led_event;

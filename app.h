@@ -38,23 +38,23 @@
 
 typedef struct {
   uint8_t MarkHead;
-  uint8_t Power_On_Times;//上电次数
-  uint8_t Onoff_1;    //开关
-  uint8_t Onoff_2;    //开关
-  uint8_t Onoff_3;    //开关
-  uint8_t Onoff_4;    //开关
-  uint8_t Mode_1;    //开关模式
-  uint8_t Mode_2;    //开关模式
-  uint8_t Mode_3;    //开关模式
+  uint8_t Power_On_Times;//Power-on times
+  uint8_t Onoff_1;    //switch
+  uint8_t Onoff_2;    //switch
+  uint8_t Onoff_3;    //switch
+  uint8_t Onoff_4;    //switch
+  uint8_t Mode_1;    //switch mode
+  uint8_t Mode_2;    //switch mode
+  uint8_t Mode_3;    //switch mode
 
   uint8_t power_memory_1;
   uint8_t power_memory_2;
   uint8_t power_memory_3;
   uint8_t backlight_mode;
-  uint8_t backlight_16;    //背光开关
-  uint8_t Brightness;  //亮度
-  uint8_t resever;     //保留
-  uint16_t Color_Temp;  //色温
+  uint8_t backlight_16;    //backlight switch
+  uint8_t Brightness;  //brightness
+  uint8_t resever;     //reserve
+  uint16_t Color_Temp;  //color temperature
   uint32_t Count_Down_1;
   uint32_t Count_Down_2;
   uint32_t Count_Down_3;
@@ -74,7 +74,7 @@ extern G_USER_CTRL_T *tpUserControl;
 
 extern uint16_t HeartbeatTime;
 extern uint32_t Save_HbTime;
-#define  Time_Count    10     //定时器设置10ms
+#define  Time_Count    10     //Timer setting 10ms
 void report_hearbeat(void);
 void app_init(void);
 void app_process_action(void);
