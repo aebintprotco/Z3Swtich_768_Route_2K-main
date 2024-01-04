@@ -93,34 +93,34 @@ const sl_led_t sl_led_led2 = {
   .toggle = sl_simple_led_toggle,
   .get_state = sl_simple_led_get_state,
 };
-sl_simple_led_context_t simple_led3_context = {
-  .port = SL_SIMPLE_LED_LED3_PORT,
-  .pin = SL_SIMPLE_LED_LED3_PIN,
-  .polarity = SL_SIMPLE_LED_LED3_POLARITY,
-};
+// sl_simple_led_context_t simple_led3_context = {
+//   .port = SL_SIMPLE_LED_LED3_PORT,
+//   .pin = SL_SIMPLE_LED_LED3_PIN,
+//   .polarity = SL_SIMPLE_LED_LED3_POLARITY,
+// };
 
-const sl_led_t sl_led_led3 = {
-  .context = &simple_led3_context,
-  .init = sl_simple_led_init,
-  .turn_on = sl_simple_led_turn_on,
-  .turn_off = sl_simple_led_turn_off,
-  .toggle = sl_simple_led_toggle,
-  .get_state = sl_simple_led_get_state,
-};
-sl_simple_led_context_t simple_led4_context = {
-  .port = SL_SIMPLE_LED_LED4_PORT,
-  .pin = SL_SIMPLE_LED_LED4_PIN,
-  .polarity = SL_SIMPLE_LED_LED4_POLARITY,
-};
+// const sl_led_t sl_led_led3 = {
+//   .context = &simple_led3_context,
+//   .init = sl_simple_led_init,
+//   .turn_on = sl_simple_led_turn_on,
+//   .turn_off = sl_simple_led_turn_off,
+//   .toggle = sl_simple_led_toggle,
+//   .get_state = sl_simple_led_get_state,
+// };
+// sl_simple_led_context_t simple_led4_context = {
+//   .port = SL_SIMPLE_LED_LED4_PORT,
+//   .pin = SL_SIMPLE_LED_LED4_PIN,
+//   .polarity = SL_SIMPLE_LED_LED4_POLARITY,
+// };
 
-const sl_led_t sl_led_led4 = {
-  .context = &simple_led4_context,
-  .init = sl_simple_led_init,
-  .turn_on = sl_simple_led_turn_on,
-  .turn_off = sl_simple_led_turn_off,
-  .toggle = sl_simple_led_toggle,
-  .get_state = sl_simple_led_get_state,
-};
+// const sl_led_t sl_led_led4 = {
+//   .context = &simple_led4_context,
+//   .init = sl_simple_led_init,
+//   .turn_on = sl_simple_led_turn_on,
+//   .turn_off = sl_simple_led_turn_off,
+//   .toggle = sl_simple_led_toggle,
+//   .get_state = sl_simple_led_get_state,
+// };
 
 const sl_led_t *sl_simple_led_array[] = {
   &sl_led_led0,

@@ -56,12 +56,12 @@
 // [PRS.SYNCH3]$
 
 // $[GPIO]
-// GPIO SWV on PA03
+// GPIO SWV on PC02
 #ifndef GPIO_SWV_PORT                           
-#define GPIO_SWV_PORT                            gpioPortA
+#define GPIO_SWV_PORT                            gpioPortC
 #endif
 #ifndef GPIO_SWV_PIN                            
-#define GPIO_SWV_PIN                             3
+#define GPIO_SWV_PIN                             2
 #endif
 
 // [GPIO]$

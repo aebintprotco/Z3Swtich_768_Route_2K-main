@@ -49,10 +49,10 @@
 // <gpio> SL_SIMPLE_BUTTON_BTN2
 // $[GPIO_SL_SIMPLE_BUTTON_BTN2]
 #ifndef SL_SIMPLE_BUTTON_BTN2_PORT              
-#define SL_SIMPLE_BUTTON_BTN2_PORT               gpioPortB
+#define SL_SIMPLE_BUTTON_BTN2_PORT               gpioPortA
 #endif
 #ifndef SL_SIMPLE_BUTTON_BTN2_PIN               
-#define SL_SIMPLE_BUTTON_BTN2_PIN                1
+#define SL_SIMPLE_BUTTON_BTN2_PIN                0
 #endif
 // [GPIO_SL_SIMPLE_BUTTON_BTN2]$
 

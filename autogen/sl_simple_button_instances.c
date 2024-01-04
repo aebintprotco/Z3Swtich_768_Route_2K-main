@@ -66,46 +66,46 @@ const sl_button_t sl_button_btn2 = {
   .enable = sl_simple_button_enable,
   .disable = sl_simple_button_disable,
 };
-sl_simple_button_context_t simple_btn3_context = {
-  .state = 0,
-  .history = 0,
-  .port = SL_SIMPLE_BUTTON_BTN3_PORT,
-  .pin = SL_SIMPLE_BUTTON_BTN3_PIN,
-  .mode = SL_SIMPLE_BUTTON_BTN3_MODE,
-};
+// sl_simple_button_context_t simple_btn3_context = {
+//   .state = 0,
+//   .history = 0,
+//   .port = SL_SIMPLE_BUTTON_BTN3_PORT,
+//   .pin = SL_SIMPLE_BUTTON_BTN3_PIN,
+//   .mode = SL_SIMPLE_BUTTON_BTN3_MODE,
+// };
 
-const sl_button_t sl_button_btn3 = {
-  .context = &simple_btn3_context,
-  .init = sl_simple_button_init,
-  .get_state = sl_simple_button_get_state,
-  .poll = sl_simple_button_poll_step,
-  .enable = sl_simple_button_enable,
-  .disable = sl_simple_button_disable,
-};
-sl_simple_button_context_t simple_btn4_context = {
-  .state = 0,
-  .history = 0,
-  .port = SL_SIMPLE_BUTTON_BTN4_PORT,
-  .pin = SL_SIMPLE_BUTTON_BTN4_PIN,
-  .mode = SL_SIMPLE_BUTTON_BTN4_MODE,
-};
+// const sl_button_t sl_button_btn3 = {
+//   .context = &simple_btn3_context,
+//   .init = sl_simple_button_init,
+//   .get_state = sl_simple_button_get_state,
+//   .poll = sl_simple_button_poll_step,
+//   .enable = sl_simple_button_enable,
+//   .disable = sl_simple_button_disable,
+// };
+// sl_simple_button_context_t simple_btn4_context = {
+//   .state = 0,
+//   .history = 0,
+//   .port = SL_SIMPLE_BUTTON_BTN4_PORT,
+//   .pin = SL_SIMPLE_BUTTON_BTN4_PIN,
+//   .mode = SL_SIMPLE_BUTTON_BTN4_MODE,
+// };
 
-const sl_button_t sl_button_btn4 = {
-  .context = &simple_btn4_context,
-  .init = sl_simple_button_init,
-  .get_state = sl_simple_button_get_state,
-  .poll = sl_simple_button_poll_step,
-  .enable = sl_simple_button_enable,
-  .disable = sl_simple_button_disable,
-};
+// const sl_button_t sl_button_btn4 = {
+//   .context = &simple_btn4_context,
+//   .init = sl_simple_button_init,
+//   .get_state = sl_simple_button_get_state,
+//   .poll = sl_simple_button_poll_step,
+//   .enable = sl_simple_button_enable,
+//   .disable = sl_simple_button_disable,
+// };
 
 // the table of buttons and button count are generated as a
 // convenience for the application
 const sl_button_t *sl_simple_button_array[] = {
   &sl_button_btn1, 
-  &sl_button_btn2, 
-  &sl_button_btn3, 
-  &sl_button_btn4
+  &sl_button_btn2 
+  // &sl_button_btn3, 
+  // &sl_button_btn4
 };
 const uint8_t simple_button_count = 4;
 
