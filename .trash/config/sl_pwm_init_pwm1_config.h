@@ -69,7 +69,7 @@ extern "C"
 #endif
 // TIMER1 CC1 on PD00
 #ifndef SL_PWM_PWM1_OUTPUT_PORT                 
-#define SL_PWM_PWM1_OUTPUT_PORT                  gpioPortD
+#define SL_PWM_PWM1_OUTPUT_PORT                  gpioPortC //PD00
 #endif
 #ifndef SL_PWM_PWM1_OUTPUT_PIN                  
 #define SL_PWM_PWM1_OUTPUT_PIN                   0

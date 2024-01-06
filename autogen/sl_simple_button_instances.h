@@ -35,8 +35,8 @@
 
 extern const sl_button_t sl_button_btn1;
 extern const sl_button_t sl_button_btn2;
-extern const sl_button_t sl_button_btn3;
-extern const sl_button_t sl_button_btn4;
+// extern const sl_button_t sl_button_btn3;
+// extern const sl_button_t sl_button_btn4;
 
 extern const sl_button_t *sl_simple_button_array[];
 

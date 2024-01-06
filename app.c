@@ -377,8 +377,8 @@ void join_net_work(uint8_t join_v)
 
 static bool  key1_flag =0;
 static bool  key2_flag =0;
-static bool  key3_flag =0;
-static bool  key4_flag =0;
+// static bool  key3_flag =0;
+// static bool  key4_flag =0;
 
 #define  NET_Count    20    //20*250 =5S
 void  key_enter_net(void)
@@ -412,34 +412,34 @@ void  key_enter_net(void)
   }
 #endif
 
-#if(SWITCH_NUM >=3)   //key 3
-  static uint8_t  key3_count =0;
+// #if(SWITCH_NUM >=3)   //key 3
+//   static uint8_t  key3_count =0;
 
-  if(key3_flag){
-      if(++key3_count >=NET_Count){  //Long press 3S to configure network
-          key3_count =0;
-          join_net_work(1);
-          key3_flag =0;
-      }
+//   if(key3_flag){
+//       if(++key3_count >=NET_Count){  //Long press 3S to configure network
+//           key3_count =0;
+//           join_net_work(1);
+//           key3_flag =0;
+//       }
 
-  }else{
-      key3_count =0;
-  }
-#endif
-#if(SWITCH_NUM >=4)   //key 3
-  static uint8_t  key4_count =0;
+//   }else{
+//       key3_count =0;
+//   }
+// #endif
+// #if(SWITCH_NUM >=4)   //key 3
+//   static uint8_t  key4_count =0;
 
-  if(key4_flag){
-      if(++key4_count >=NET_Count){  //Long press 3S to configure network
-          key4_count =0;
-          join_net_work(1);
-          key4_flag =0;
-      }
+//   if(key4_flag){
+//       if(++key4_count >=NET_Count){  //Long press 3S to configure network
+//           key4_count =0;
+//           join_net_work(1);
+//           key4_flag =0;
+//       }
 
-  }else{
-      key4_count =0;
-  }
-#endif
+//   }else{
+//       key4_count =0;
+//   }
+// #endif
 
 }
 
@@ -472,9 +472,9 @@ void rep_join(void)
                set_write_flag(1);  //write to flash
 			   if(emberAfNetworkState() == EMBER_JOINED_NETWORK){
                  led_turn_off(COMMISSIONING_STATUS_LED_0);   //Connect to the Internet Off
-              //   GPIO_PinModeSet(gpioPortD,4,gpioModeInputPull,1);
-              //   GPIO_PinModeSet(gpioPortA,0,gpioModePushPull,0);
-              //   sl_zigbee_app_debug_println("COMMISSIONING_STATUS_LED_0 set off\n");
+                //  GPIO_PinModeSet(gpioPortD,4,gpioModeInputPull,1); //Aebs
+                //  GPIO_PinModeSet(gpioPortA,0,gpioModePushPull,0); //Aebs
+                //  sl_zigbee_app_debug_println("COMMISSIONING_STATUS_LED_0 set off\n"); //Aebs
 			  }
            }
        }
@@ -1225,35 +1225,37 @@ void sl_button_on_change(const sl_button_t *handle)
         key2_flag =1;
 #endif
     }
-  }else if (SL_SIMPLE_BUTTON_INSTANCE(BUTTON3) == handle) {
-      if ( sl_button_get_state(handle) == SL_SIMPLE_BUTTON_RELEASED) {
-          if(key3_flag){
-            key3_flag =0;
-            tpUserControl->Onoff_3 ^= 1;
-            sl_zigbee_app_debug_println("BUTTON3 onoff  0x%02X", tpUserControl->Onoff_3);
-            report_endpoint_onoff(3,tpUserControl->Onoff_3);
-            set_write_flag(1);
-          }
-      }else if( sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED) {
-#if(SWITCH_NUM>=3)
-          key3_flag =1;
-#endif
-      }
-   }else if (SL_SIMPLE_BUTTON_INSTANCE(BUTTON4) == handle) {
-       if ( sl_button_get_state(handle) == SL_SIMPLE_BUTTON_RELEASED) {
-           if(key4_flag){
-             key4_flag =0;
-             tpUserControl->Onoff_4 ^= 1;
-             sl_zigbee_app_debug_println("BUTTON4 onoff  0x%02X", tpUserControl->Onoff_4);
-             report_endpoint_onoff(4,tpUserControl->Onoff_4);
-             set_write_flag(1);
-           }
-       }else if( sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED) {
- #if(SWITCH_NUM>=4)
-           key4_flag =1;
- #endif
+  }
+//   else if (SL_SIMPLE_BUTTON_INSTANCE(BUTTON3) == handle) {
+//       if ( sl_button_get_state(handle) == SL_SIMPLE_BUTTON_RELEASED) {
+//           if(key3_flag){
+//             key3_flag =0;
+//             tpUserControl->Onoff_3 ^= 1;
+//             sl_zigbee_app_debug_println("BUTTON3 onoff  0x%02X", tpUserControl->Onoff_3);
+//             report_endpoint_onoff(3,tpUserControl->Onoff_3);
+//             set_write_flag(1);
+//           }
+//       }else if( sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED) {
+// #if(SWITCH_NUM>=3)
+//           key3_flag =1;
+// #endif
+//       }
+//    }else if (SL_SIMPLE_BUTTON_INSTANCE(BUTTON4) == handle) {
+//        if ( sl_button_get_state(handle) == SL_SIMPLE_BUTTON_RELEASED) {
+//            if(key4_flag){
+//              key4_flag =0;
+//              tpUserControl->Onoff_4 ^= 1;
+//              sl_zigbee_app_debug_println("BUTTON4 onoff  0x%02X", tpUserControl->Onoff_4);
+//              report_endpoint_onoff(4,tpUserControl->Onoff_4);
+//              set_write_flag(1);
+//            }
+//        }
+       else if( sl_button_get_state(handle) == SL_SIMPLE_BUTTON_PRESSED) {
+//  #if(SWITCH_NUM>=4)
+//            key4_flag =1;
+//  #endif
        }
-     }
+     //}
 }
 #endif // SL_CATALOG_SIMPLE_BUTTON_PRESENT && SL_ZIGBEE_APP_FRAMEWORK_USE_BUTTON_TO_STAY_AWAKE == 0
 

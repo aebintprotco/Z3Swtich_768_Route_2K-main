@@ -48,7 +48,7 @@
 // <gpio> SL_SIMPLE_LED_LED16
 // $[GPIO_SL_SIMPLE_LED_LED16]
 #ifndef SL_SIMPLE_LED_LED16_PORT                
-#define SL_SIMPLE_LED_LED16_PORT                 gpioPortA
+#define SL_SIMPLE_LED_LED16_PORT                 gpioPortA //BACKLIGHT AEBS
 #endif
 #ifndef SL_SIMPLE_LED_LED16_PIN                 
 #define SL_SIMPLE_LED_LED16_PIN                  6

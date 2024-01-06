@@ -24,8 +24,8 @@ Network indicator TXD active high PA05
  Flashing during network configuration
 
 
-Button 1 PB00, control PD01 active high level
-Button 2 PB01, PC02
+Button 1 PB00 (AEBS-PA00), control PD01 active high level
+Button 2 PB01 (AEBS-PA3), PC02
 
 							
 Zero-crossing detection port, the low level of PA04 is zero point, after a delay of 6MS, it drives the relay.
