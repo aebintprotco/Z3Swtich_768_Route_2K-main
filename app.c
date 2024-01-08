@@ -169,8 +169,8 @@ void nvm3_user_init(void)
       tpUserInit->Color_Temp     = 250;            //
       tpUserInit->Onoff_1        = 0;              //
       tpUserInit->Onoff_2        = 0;              //
-      tpUserInit->Onoff_3        = 0;              //
-      tpUserInit->Onoff_4        = 0;              //
+      tpUserInit->Onoff_3        = 0;              // AEBS
+      tpUserInit->Onoff_4        = 0;              //AEBS
       tpUserInit->Mode_1         = '0';            //
       tpUserInit->Mode_2         = '0';              //
       tpUserInit->Mode_3         = '0';             //
@@ -315,7 +315,8 @@ void write_flash(void)
           EmberStatus status = nvm3_writeData(nvm3_defaultHandle, User_Dat_ID, tpUserControl, sizeof(G_USER_CTRL_T)); //write to flash
           sl_zigbee_app_debug_println("write status: 0x%x \n",status);
           nvm3_readData(nvm3_defaultHandle, User_Dat_ID, tpUserInit, sizeof(G_USER_CTRL_T));
-          sl_zigbee_app_debug_println("read ->Power_On_Times: %d   Onoff =%d  Onoff2 =%d  Onoff3 =%d\n",tpUserInit->Power_On_Times,tpUserInit->Onoff_1,tpUserInit->Onoff_2,tpUserInit->Onoff_3);
+          sl_zigbee_app_debug_println("read ->Power_On_Times: %d   Onoff =%d  Onoff2 =%d  \n",tpUserInit->Power_On_Times,tpUserInit->Onoff_1,tpUserInit->Onoff_2);// AEBS           sl_zigbee_app_debug_println("read ->Power_On_Times: %d   Onoff =%d  Onoff2 =%d  Onoff3 =%d\n",tpUserInit->Power_On_Times,tpUserInit->Onoff_1,tpUserInit->Onoff_2,tpUserInit->Onoff_3);
+
 
       }
     }
@@ -473,8 +474,8 @@ void rep_join(void)
 			   if(emberAfNetworkState() == EMBER_JOINED_NETWORK){
                  led_turn_off(COMMISSIONING_STATUS_LED_0);   //Connect to the Internet Off
                 //  GPIO_PinModeSet(gpioPortD,4,gpioModeInputPull,1); //Aebs
-                //  GPIO_PinModeSet(gpioPortA,0,gpioModePushPull,0); //Aebs
-                //  sl_zigbee_app_debug_println("COMMISSIONING_STATUS_LED_0 set off\n"); //Aebs
+                 GPIO_PinModeSet(gpioPortA,4,gpioModePushPull,1); //Aebs gpioModePushPull,0
+                 sl_zigbee_app_debug_println("COMMISSIONING_STATUS_LED_0 set off\n"); //Aebs
 			  }
            }
        }
