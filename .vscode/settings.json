@@ -1,0 +1,5 @@
+{
+    "files.associations": {
+        "zigbee_sleep_config.h": "c"
+    }
+}

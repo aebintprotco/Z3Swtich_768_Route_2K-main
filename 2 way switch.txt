@@ -1,0 +1,35 @@
+                    	ZS3L				    
+背光指示灯，     RXD 高电平有效    PA06			
+网络指示灯       TXD 高电平有效	 PA05			
+                未联网 亮，已联网灭
+ 		配网过程中闪烁
+
+
+按键1		PB00， 控制 PD01 高电平有效			
+按键2 		PB01,      PC02				
+
+							
+过零检测口， PA04   低电平为零点，  后延时6MS， 驱动继电器。 
+
+
+功能测试
+背光，橙色， 可开关，  配网指示灯蓝色， 配网闪烁平时灭，  开关指示灯， 白色， 开亮关灭。
+
+
+
+
+Backlight indicator, RXD active high PA06
+Network indicator TXD active high PA05
+                Not connected to the Internet. On, connected to the Internet. Off.
+ Flashing during network configuration
+
+
+Button 1 PB00 (AEBS-PA00), control PD01 active high level
+Button 2 PB01 (AEBS-PA3), PC02
+
+							
+Zero-crossing detection port, the low level of PA04 is zero point, after a delay of 6MS, it drives the relay.
+
+
+function test
+Backlight, orange, can be switched on and off. The distribution network indicator light is blue. The distribution network indicator light flashes and is usually off. The switch indicator light is white. It is on and off.
