@@ -24,11 +24,11 @@
 #include "network_test_config.h"
 #endif //SL_CATALOG_ZIGBEE_NETWORK_TEST_PRESENT
 
-#if (LARGE_NETWORK_TESTING == 0) //AEBS
-#ifndef EZSP_HOST //AEBS
+#if (LARGE_NETWORK_TESTING == 0)
+#ifndef EZSP_HOST
 
-#include "zigbee_sleep_config.h" //AEBS
-#endif //AEBS
+#include "zigbee_sleep_config.h"
+#endif
 
 #include "network-creator.h"
 #include "network-creator-security.h"
@@ -47,8 +47,8 @@
 #define COMMISSIONING_STATUS_LED_0     (&sl_led_led0)
 #define COMMISSIONING_STATUS_LED_1     (&sl_led_led1)
 #define COMMISSIONING_STATUS_LED_2     (&sl_led_led2)
-// #define COMMISSIONING_STATUS_LED_3     (&sl_led_led3) //AEBS
-// #define COMMISSIONING_STATUS_LED_4     (&sl_led_led4) //AEBS
+#define COMMISSIONING_STATUS_LED_3     (&sl_led_led3)
+#define COMMISSIONING_STATUS_LED_4     (&sl_led_led4)
 #define COMMISSIONING_STATUS_LED_16    (&sl_led_led16)
 
 #else // !SL_CATALOG_LED0_PRESENT
@@ -116,7 +116,7 @@ extern uint8_t  recevi_type;
 
 void emberAfMainTickCallback(void)
 {
- led_toggle(&sl_led_led0); //AEBS
+ // led_toggle(&sl_led_led0);
 }
 uint8_t nvm_init_ok =0;
 void nvm3_user_init(void)
@@ -473,8 +473,8 @@ void rep_join(void)
 			   if(emberAfNetworkState() == EMBER_JOINED_NETWORK){
                  led_turn_off(COMMISSIONING_STATUS_LED_0);   //Connect to the Internet Off
                 //  GPIO_PinModeSet(gpioPortD,4,gpioModeInputPull,1); //Aebs
-                  GPIO_PinModeSet(gpioPortA,4,gpioModePushPull,0); //Aebs GPIO_PinModeSet(gpioPortA,0,gpioModePushPull,0);
-                  sl_zigbee_app_debug_println("COMMISSIONING_STATUS_LED_0 set off\n"); //Aebs
+                //  GPIO_PinModeSet(gpioPortA,0,gpioModePushPull,0); //Aebs
+                //  sl_zigbee_app_debug_println("COMMISSIONING_STATUS_LED_0 set off\n"); //Aebs
 			  }
            }
        }
@@ -590,11 +590,11 @@ void app_opened_timer_cbbbx(app_timer_t *timer, void *data)
   if(++c_100ms >=10){ //100MS
       c_100ms =0;
       r_Abnormal_recovery =0;
-      if(++sec_count >=10){  //1S time is up
+      if(++sec_count >=10){  //1S时间到
          sec_count =0;
          one_sec_flg =1;
          r_30second ++;
-         init_ok =1;      //1S after initialization
+         init_ok =1;      //初始化化后过1S
       }
    }
   if(delay_report > 1){
@@ -1176,7 +1176,7 @@ void emberAfRadioNeedsCalibratingCallback(void)
   #endif
 }
 
-#if defined(SL_CATALOG_SIMPLE_BUTTON_PRESENT) || (SL_ZIGBEE_APP_FRAMEWORK_USE_BUTTON_TO_STAY_AWAKE == 0) //(SL_CATALOG_SIMPLE_BUTTON_PRESENT) && (SL_ZIGBEE_APP_FRAMEWORK_USE_BUTTON_TO_STAY_AWAKE == 0)
+#if defined(SL_CATALOG_SIMPLE_BUTTON_PRESENT) && (SL_ZIGBEE_APP_FRAMEWORK_USE_BUTTON_TO_STAY_AWAKE == 0)
 #include "sl_simple_button.h"
 #include "sl_simple_button_instances.h"
 #ifdef SL_CATALOG_ZIGBEE_FORCE_SLEEP_AND_WAKEUP_PRESENT
@@ -1254,8 +1254,8 @@ void sl_button_on_change(const sl_button_t *handle)
 //  #if(SWITCH_NUM>=4)
 //            key4_flag =1;
 //  #endif
-      //}
-     }
+       }
+     //}
 }
 #endif // SL_CATALOG_SIMPLE_BUTTON_PRESENT && SL_ZIGBEE_APP_FRAMEWORK_USE_BUTTON_TO_STAY_AWAKE == 0
 

@@ -21,12 +21,12 @@
 // <o SL_ZIGBEE_APP_FRAMEWORK_MINIMUM_SLEEP_DURATION_MS> Minimum Sleep Duration <5-1000>
 // <i> Default: 5
 // <i> The minimum duration in milliseconds that the application will attempt to sleep for. If the sleep duration would be less than this amount, the application will not sleep.
-#define SL_ZIGBEE_APP_FRAMEWORK_MINIMUM_SLEEP_DURATION_MS   1000 //AEBS 5
+#define SL_ZIGBEE_APP_FRAMEWORK_MINIMUM_SLEEP_DURATION_MS   5
 
 // <o SL_ZIGBEE_APP_FRAMEWORK_BACKOFF_SLEEP_MS> Sleep Backoff time <0-10000>
 // <i> Default: 0
 // <i> This setting will keep a device from going back to sleep immediately upon waking up
-#define SL_ZIGBEE_APP_FRAMEWORK_BACKOFF_SLEEP_MS   1000//AEBS 0
+#define SL_ZIGBEE_APP_FRAMEWORK_BACKOFF_SLEEP_MS   0
 
 // <q SL_ZIGBEE_APP_FRAMEWORK_STAY_AWAKE_WHEN_NOT_JOINED> Stay awake when NOT joined
 // <i> Default: TRUE
